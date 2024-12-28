@@ -14,6 +14,7 @@ Note: Do not remove any elements that were included in the screen. You may add a
 
 D.  Add an “About” page to the application to describe your chosen customer’s company to web viewers and include navigation to and from the “About” page and the main screen.
 
+#Made an about page which included basic information of the shop. Also made an about controller which displays the about page
 
 E.  Add a sample inventory appropriate for your chosen store to the application. You should have five parts and five products in your sample inventory and should not overwrite existing data in the database.
 
