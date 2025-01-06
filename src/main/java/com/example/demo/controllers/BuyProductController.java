@@ -30,19 +30,19 @@ public class BuyProductController {
             if (product.getInv() > 0) {
 
                 product.setInv(product.getInv() - 1);
-                productService.save(product); // Save the updated product
+                productService.save(product); 
 
                 model.addAttribute("message", "Purchase was successful!");
-                return "purchaseSuccess"; // Redirect to purchase success page
+                return "purchaseSuccess";
             } else {
 
                 model.addAttribute("message", "This product is out of stock.");
-                return "purchaseError"; // Redirect to purchase error page
+                return "purchaseError";
             }
         } else {
-           
+
             model.addAttribute("message", "Product not found.");
-            return "purchaseError"; // Redirect to purchase error page
+            return "purchaseError";
         }
     }
 }
