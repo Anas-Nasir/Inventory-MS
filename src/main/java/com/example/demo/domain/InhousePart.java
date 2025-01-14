@@ -14,7 +14,10 @@ import javax.persistence.Entity;
 public class InhousePart extends Part{
     int partId;
 
+
     public InhousePart() {
+        this.minInv = 0;
+        this.maxInv = 100;
     }
 
     public int getPartId() {

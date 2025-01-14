@@ -29,6 +29,12 @@ public class Part implements Serializable {
     @Min(value = 0, message = "Inventory value must be positive")
     int inv;
 
+    // New fields for minimum and maximum inventory
+    @Min(value = 0, message = "Minimum inventory value must be positive")
+    int minInv;
+    @Min(value = 0, message = "Maximum inventory value must be greater than minimum inventory")
+    int maxInv;
+
     @ManyToMany
     @JoinTable(name="product_part", joinColumns = @JoinColumn(name="part_id"),
             inverseJoinColumns=@JoinColumn(name="product_id"))
@@ -41,13 +47,17 @@ public class Part implements Serializable {
         this.name = name;
         this.price = price;
         this.inv = inv;
+        this.minInv = 0;  // Default value for minimum inventory
+        this.maxInv = 100;  // Default value for maximum inventory
     }
 
-    public Part(long id, String name, double price, int inv) {
+    public Part(long id, String name, double price, int inv, int minInv, int maxInv) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.inv = inv;
+        this.minInv = minInv;
+        this.maxInv = maxInv;
     }
 
     public long getId() {
@@ -90,9 +100,34 @@ public class Part implements Serializable {
         this.products = products;
     }
 
+    public int getMinInv() {
+        return minInv;}
+
+    public void setMinInv(int minInv) {
+        this.minInv = minInv;}
+
+    public int getMaxInv() {
+        return maxInv;}
+
+    public void InventoryLimits(int newInventory) {
+        if (newInventory < minInv) {
+            throw new IllegalArgumentException("Inventory cannot be less than the minimum inventory of " + minInv);
+        }
+        if (newInventory > maxInv) {
+            throw new IllegalArgumentException("Inventory cannot exceed the maximum inventory of " + maxInv);
+        }
+        this.inv = newInventory;
+    }
+
+
+
+    public void setMaxInv(int maxInv) { this.maxInv = maxInv; }
+
+
     public String toString(){
         return this.name;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -102,6 +137,8 @@ public class Part implements Serializable {
 
         return id == part.id;
     }
+
+
 
     @Override
     public int hashCode() {

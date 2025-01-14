@@ -30,7 +30,7 @@ public class BuyProductController {
             if (product.getInv() > 0) {
 
                 product.setInv(product.getInv() - 1);
-                productService.save(product); 
+                productService.save(product);
 
                 model.addAttribute("message", "Purchase was successful!");
                 return "purchaseSuccess";
