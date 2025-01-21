@@ -27,6 +27,7 @@ class PartTest {
         partIn=new InhousePart();
         partOut=new OutsourcedPart();
     }
+
     @Test
     void getId() {
         Long idValue=4L;
@@ -127,6 +128,8 @@ class PartTest {
         assertEquals(myProducts,partOut.getProducts());
     }
 
+
+
     @Test
     void testToString() {
         String name="test inhouse part";
@@ -155,5 +158,40 @@ class PartTest {
         partIn.setId(1l);
         partOut.setId(1l);
         assertEquals(partIn.hashCode(),partOut.hashCode());
+    }
+
+    void testMaxInv() {
+        int maxInv = Integer.MAX_VALUE;
+        partIn.setInv(maxInv);
+        assertEquals(maxInv, partIn.getInv());
+        partOut.setInv(maxInv);
+        assertEquals(maxInv, partOut.getInv());
+    }
+
+    @Test
+    void testMinInv() {
+        int minInv = 0;
+        partIn.setInv(minInv);
+        assertEquals(minInv, partIn.getInv());
+        partOut.setInv(minInv);
+        assertEquals(minInv, partOut.getInv());
+    }
+
+    @Test
+    void testMaxPrice() {
+        double maxPrice = Double.MAX_VALUE;
+        partIn.setPrice(maxPrice);
+        assertEquals(maxPrice, partIn.getPrice());
+        partOut.setPrice(maxPrice);
+        assertEquals(maxPrice, partOut.getPrice());
+    }
+
+    @Test
+    void testMinPrice() {
+        double minPrice = 0.0;
+        partIn.setPrice(minPrice);
+        assertEquals(minPrice, partIn.getPrice());
+        partOut.setPrice(minPrice);
+        assertEquals(minPrice, partOut.getPrice());
     }
 }
