@@ -63,7 +63,7 @@ H.  Add validation for between or at the maximum and minimum fields. The validat
 
 
 I.  Add at least two unit tests for the maximum and minimum fields to the PartTest class in the test package.
-
+#From line 163-196 Added unit tests to check the inventory and price fields for extreme values
 
 J.  Remove the class files for any unused validators in order to clean your code.
 #Removed DeletePartsValidator.java as it had no use
