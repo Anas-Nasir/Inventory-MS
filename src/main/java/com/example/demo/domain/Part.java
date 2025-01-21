@@ -144,4 +144,12 @@ public class Part implements Serializable {
     public int hashCode() {
         return (int) (id ^ (id >>> 32));
     }
+
+    public boolean isValidInvAmount() {
+        return this.inv >= this.minInv && this.inv <= this.maxInv;
+    }
+
+    public int getMinValue() {
+        return this.minInv;
+    }
 }
