@@ -13,8 +13,8 @@ import javax.persistence.Entity;
 @DiscriminatorValue("1")
 public class InhousePart extends Part {
     int partId;
-    private int maxValue;
-    private int minValue;
+    private int maxInv;
+    private int minInv;
 
 
     public InhousePart() {
@@ -30,13 +30,22 @@ public class InhousePart extends Part {
         this.partId = partId;
     }
 
-    public int getMaxValue() {
-
-        return this.maxValue;
+    public int getMaxInv() {
+        return this.maxInv;
     }
 
-    public int getMinValue() {
-        return this.minValue;
+    public void setMaxInv(int maxInv) {
+        this.maxInv = maxInv;
     }
+
+    public int getMinInv() {
+        return this.minInv;
+    }
+
+    public void setMinInv(int minInv) {
+        this.minInv = minInv;
+    }
+
+
+
 }
-

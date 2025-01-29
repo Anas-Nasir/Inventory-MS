@@ -30,37 +30,42 @@ public class AddInhousePartController{
     private ApplicationContext context;
 
     @GetMapping("/showFormAddInPart")
-    public String showFormAddInhousePart(Model theModel){
+    public String showFormAddInhousePart(Model model){
         InhousePart inhousepart=new InhousePart();
-        theModel.addAttribute("inhousepart",inhousepart);
+        model.addAttribute("inhousepart",inhousepart);
         return "InhousePartForm";
     }
 
+
+
     @PostMapping("/showFormAddInPart")
-    public String submitForm(@Valid @ModelAttribute("inhousepart") InhousePart part, BindingResult theBindingResult, Model theModel){
-        theModel.addAttribute("inhousepart",part);
+    public String submitForm(@Valid @ModelAttribute("inhousepart") InhousePart part,
+                             BindingResult theBindingResult,
+                             Model theModel) {
 
-        if (part.getInv() < part.getMinValue()) {
-            theBindingResult.rejectValue("inv", "LowInventoryAmount", "Below minimum inventory amount!");
+        // If there are validation errors, return to the form
+        if (theBindingResult.hasErrors()) {
+            theModel.addAttribute("inhousepart", part);
             return "InhousePartForm";
         }
 
-        if (part.getInv() > part.getMaxValue()) {
-            theBindingResult.rejectValue("inv", "HighInventoryAmount", "Above maximum inventory amount!");
+
+        if (part.getInv() < part.getMinInv()) {
+            theBindingResult.rejectValue("inventory", "LowInventory", "Below minimum!");
             return "InhousePartForm";
         }
 
-
-        if(theBindingResult.hasErrors()){
+        if (part.getInv() > part.getMaxInv()) {
+            theBindingResult.rejectValue("inventory", "HighInventory", "Above maximum!");
             return "InhousePartForm";
         }
-        else{
-        InhousePartService repo=context.getBean(InhousePartServiceImpl.class);
-        InhousePart ip=repo.findById((int)part.getId());
-        if(ip!=null)part.setProducts(ip.getProducts());
-            repo.save(part);
 
-        return "confirmationaddpart";}
+        InhousePartService repo = context.getBean(InhousePartServiceImpl.class);
+        InhousePart ip = repo.findById((int) part.getId());
+        if(ip != null) part.setProducts(ip.getProducts());
+        repo.save(part);
+
+        return "confirmationaddpart";
     }
 
 }
