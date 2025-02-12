@@ -1,5 +1,6 @@
 package com.example.demo.bootstrap;
 
+import com.example.demo.domain.InhousePart;
 import com.example.demo.domain.OutsourcedPart;
 import com.example.demo.domain.Part;
 import com.example.demo.domain.Product;
@@ -67,45 +68,65 @@ public class BootStrapData implements CommandLineRunner {
         productRepository.save(StreamingSetup);
 */
 
-
         if (partRepository.count() == 0 && productRepository.count() == 0) {
-            Part part1 = new Part("AMD Ryzen 9 5900X Processor", 299.99, 10);
-            Part part2 = new Part("NVIDIA RTX 4090 GPU", 499.99, 5);
-            Part part3 = new Part("64GB Corsair Vengeance RAM", 99.99, 20);
-            Part part4 = new Part("1TB NVMe SSD", 129.99, 15);
-            Part part5 = new Part("850W PSU (Power Supply Unit)", 199.99, 8);
-
-            partRepository.save(part1);
-            partRepository.save(part2);
-            partRepository.save(part3);
-            partRepository.save(part4);
-            partRepository.save(part5);
 
 
+            InhousePart AMD = new InhousePart();
+            AMD.setName("AMD Ryzen 9 5900X Processor");
+            AMD.setPrice(299.99);
+            AMD.setInv(10);
 
-            Product product1 = new Product("Elgato Stream Deck", 1499.99, 3);
-            Product product2 = new Product("Logitech C920 Webcam", 399.99, 7);
-            Product product3 = new Product("Blue Yeti Microphone", 1299.99, 4);
-            Product product4 = new Product("Ring Light", 799.99, 6);
-            Product product5 = new Product("Green Screen", 999.99, 5);
+            InhousePart Nvidia = new InhousePart();
+            Nvidia.setName("NVIDIA RTX 4090 GPU");
+            Nvidia.setPrice(499.99);
+            Nvidia.setInv(5);
 
-            productRepository.save(product1);
-            productRepository.save(product2);
-            productRepository.save(product3);
-            productRepository.save(product4);
-            productRepository.save(product5);
+            InhousePart Corsair = new InhousePart();
+            Corsair.setName("64GB Corsair Vengeance RAM");
+            Corsair.setPrice(499.44);
+            Corsair.setInv(10);
+
+            InhousePart NVMe = new InhousePart();
+            NVMe.setName("1TB NVMe SSD");
+            NVMe.setPrice(129.99);
+            NVMe.setInv(15);
+
+            InhousePart PSU = new InhousePart();
+            PSU.setName("850W PSU (Power Supply Unit");
+            PSU.setPrice(199);
+            PSU.setInv(10);
+
+            partRepository.save(AMD);
+            partRepository.save(Nvidia);
+            partRepository.save(Corsair);
+            partRepository.save(NVMe);
+            partRepository.save(PSU);
+
+
+            Product ElgatoStreamDeck = new Product("Elgato Stream Deck", 1499.99, 3);
+            Product LogitechC920Webcam = new Product("Logitech C920 Webcam", 399.99, 7);
+            Product BlueYetiMicrophone = new Product("Blue Yeti Microphone", 1299.99, 4);
+            Product RingLight = new Product("Ring Light", 799.99, 6);
+            Product GreenScreen = new Product("Green Screen", 999.99, 5);
+
+            productRepository.save(ElgatoStreamDeck);
+            productRepository.save(LogitechC920Webcam);
+            productRepository.save(BlueYetiMicrophone);
+            productRepository.save(RingLight);
+            productRepository.save(GreenScreen);
 
         }
+
         System.out.println("Started in Bootstrap");
         System.out.println("Number of Products"+productRepository.count());
         System.out.println(productRepository.findAll());
         System.out.println("Number of Parts"+partRepository.count());
         System.out.println(partRepository.findAll());
-        }
-
-
 
     }
+}
+
+
 
 
 

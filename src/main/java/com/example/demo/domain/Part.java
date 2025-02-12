@@ -4,6 +4,7 @@ import com.example.demo.validators.ValidDeletePart;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,7 +20,7 @@ import java.util.Set;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="part_type",discriminatorType = DiscriminatorType.INTEGER)
 @Table(name="Parts")
-public class Part implements Serializable {
+public abstract class Part implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
@@ -28,12 +29,16 @@ public class Part implements Serializable {
     double price;
     @Min(value = 0, message = "Inventory value must be positive")
     int inv;
+    @NotNull(message = "Maximum inventory value must not be null")
+    @Min(value = 0, message = "Maximum inventory value must be positive")
+    private int maximum;
 
-    // New fields for minimum and maximum inventory
     @Min(value = 0, message = "Minimum inventory value must be positive")
-    int minInv;
-    @Min(value = 0, message = "Maximum inventory value must be greater than minimum inventory")
-    int maxInv;
+    private int minimum;
+
+
+
+
 
     @ManyToMany
     @JoinTable(name="product_part", joinColumns = @JoinColumn(name="part_id"),
@@ -41,23 +46,20 @@ public class Part implements Serializable {
     Set<Product> products= new HashSet<>();
 
     public Part() {
+
     }
 
     public Part(String name, double price, int inv) {
         this.name = name;
         this.price = price;
         this.inv = inv;
-        this.minInv = 0;  // Default value for minimum inventory
-        this.maxInv = 100;  // Default value for maximum inventory
     }
 
-    public Part(long id, String name, double price, int inv, int minInv, int maxInv) {
+    public Part(long id, String name, double price, int inv) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.inv = inv;
-        this.minInv = minInv;
-        this.maxInv = maxInv;
     }
 
     public long getId() {
@@ -99,35 +101,27 @@ public class Part implements Serializable {
     public void setProducts(Set<Product> products) {
         this.products = products;
     }
-
-    public int getMinInv() {
-        return minInv;}
-
-    public void setMinInv(int minInv) {
-        this.minInv = minInv;}
-
-    public int getMaxInv() {
-        return maxInv;}
-
-    public void InventoryLimits(int newInventory) {
-        if (newInventory < minInv) {
-            throw new IllegalArgumentException("Inventory cannot be less than the minimum inventory of " + minInv);
-        }
-        if (newInventory > maxInv) {
-            throw new IllegalArgumentException("Inventory cannot exceed the maximum inventory of " + maxInv);
-        }
-        this.inv = newInventory;
+    public int getMinimum() {
+        return minimum;
     }
 
+    public void setMinimum(int minimum) {
+        this.minimum = minimum;
+    }
 
+    public int getMaximum() {
+        return maximum;
+    }
 
-    public void setMaxInv(int maxInv) { this.maxInv = maxInv; }
+    public void setMaximum(int maximum) {
+        this.maximum = maximum;
+    }
+
 
 
     public String toString(){
         return this.name;
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -138,18 +132,11 @@ public class Part implements Serializable {
         return id == part.id;
     }
 
-
-
     @Override
     public int hashCode() {
         return (int) (id ^ (id >>> 32));
     }
 
-    public boolean isValidInvAmount() {
-        return this.inv >= this.minInv && this.inv <= this.maxInv;
-    }
 
-    public int getMinValue() {
-        return this.minInv;
-    }
+
 }

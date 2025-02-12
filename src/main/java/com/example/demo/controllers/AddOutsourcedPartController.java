@@ -3,7 +3,6 @@ package com.example.demo.controllers;
 import com.example.demo.domain.InhousePart;
 import com.example.demo.domain.OutsourcedPart;
 import com.example.demo.domain.Part;
-import com.example.demo.domain.Product;
 import com.example.demo.service.OutsourcedPartService;
 import com.example.demo.service.OutsourcedPartServiceImpl;
 import com.example.demo.service.PartService;
@@ -41,31 +40,15 @@ public class AddOutsourcedPartController {
     @PostMapping("/showFormAddOutPart")
     public String submitForm(@Valid @ModelAttribute("outsourcedpart") OutsourcedPart part, BindingResult bindingResult, Model theModel){
         theModel.addAttribute("outsourcedpart",part);
-
-        if (!part.isValidInvAmount()) {
-            if (part.getInv() < part.getMinInv()) {
-                bindingResult.rejectValue("inv", "LowInventoryAmount", "Below minimum inventory amount!");
-                return "OutsourcedPartForm";
-            }
-
-            if (part.getInv() > part.getMaxInv()) {
-                bindingResult.rejectValue("inv", "HighInventoryAmount", "Above maximum inventory amount!");
-                return "OutsourcedPartForm";
-            }
-            if(!part.isValidInvAmount())
-                bindingResult.rejectValue("inv", "InvalidInventoryAmount", "Invalid inventory amount!");
-            return "OutsourcedPartForm";
-        }
-
         if(bindingResult.hasErrors()){
             return "OutsourcedPartForm";
         }
-
-        OutsourcedPartService repo=context.getBean(OutsourcedPartServiceImpl.class);
-        OutsourcedPart op=repo.findById((int)part.getId());
-        if(op!=null)part.setProducts(op.getProducts());
-        repo.save(part);
-        return "confirmationaddpart";
+        else{
+            OutsourcedPartService repo=context.getBean(OutsourcedPartServiceImpl.class);
+            OutsourcedPart op=repo.findById((int)part.getId());
+            if(op!=null)part.setProducts(op.getProducts());
+            repo.save(part);
+            return "confirmationaddpart";}
     }
 
 

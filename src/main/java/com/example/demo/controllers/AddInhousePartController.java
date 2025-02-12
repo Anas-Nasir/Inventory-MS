@@ -30,42 +30,25 @@ public class AddInhousePartController{
     private ApplicationContext context;
 
     @GetMapping("/showFormAddInPart")
-    public String showFormAddInhousePart(Model model){
+    public String showFormAddInhousePart(Model theModel){
         InhousePart inhousepart=new InhousePart();
-        model.addAttribute("inhousepart",inhousepart);
+        theModel.addAttribute("inhousepart",inhousepart);
         return "InhousePartForm";
     }
 
-
-
     @PostMapping("/showFormAddInPart")
-    public String submitForm(@Valid @ModelAttribute("inhousepart") InhousePart part,
-                             BindingResult theBindingResult,
-                             Model theModel) {
-
-        // If there are validation errors, return to the form
-        if (theBindingResult.hasErrors()) {
-            theModel.addAttribute("inhousepart", part);
+    public String submitForm(@Valid @ModelAttribute("inhousepart") InhousePart part, BindingResult theBindingResult, Model theModel){
+        theModel.addAttribute("inhousepart",part);
+        if(theBindingResult.hasErrors()){
             return "InhousePartForm";
         }
+        else{
+            InhousePartService repo=context.getBean(InhousePartServiceImpl.class);
+            InhousePart ip=repo.findById((int)part.getId());
+            if(ip!=null)part.setProducts(ip.getProducts());
+            repo.save(part);
 
-
-        if (part.getInv() < part.getMinInv()) {
-            theBindingResult.rejectValue("inventory", "LowInventory", "Below minimum!");
-            return "InhousePartForm";
-        }
-
-        if (part.getInv() > part.getMaxInv()) {
-            theBindingResult.rejectValue("inventory", "HighInventory", "Above maximum!");
-            return "InhousePartForm";
-        }
-
-        InhousePartService repo = context.getBean(InhousePartServiceImpl.class);
-        InhousePart ip = repo.findById((int) part.getId());
-        if(ip != null) part.setProducts(ip.getProducts());
-        repo.save(part);
-
-        return "confirmationaddpart";
+            return "confirmationaddpart";}
     }
 
 }

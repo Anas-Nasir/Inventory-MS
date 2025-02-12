@@ -69,8 +69,8 @@ public class AddProductController {
             theModel.addAttribute("assparts",product2.getParts());
             return "productForm";
         }
- //       theModel.addAttribute("assparts", assparts);
- //       this.product=product;
+        //       theModel.addAttribute("assparts", assparts);
+        //       this.product=product;
 //        product.getParts().addAll(assparts);
         else {
             ProductService repo = context.getBean(ProductServiceImpl.class);
@@ -93,14 +93,13 @@ public class AddProductController {
         }
     }
 
-
     @GetMapping("/showProductFormForUpdate")
     public String showProductFormForUpdate(@RequestParam("productID") int theId, Model theModel) {
         theModel.addAttribute("parts", partService.findAll());
         ProductService repo = context.getBean(ProductServiceImpl.class);
         Product theProduct = repo.findById(theId);
         product1=theProduct;
-    //    this.product=product;
+        //    this.product=product;
         //set the employ as a model attibute to prepopulate the form
         theModel.addAttribute("product", theProduct);
         theModel.addAttribute("assparts",theProduct.getParts());
@@ -135,31 +134,31 @@ public class AddProductController {
 
     @GetMapping("/associatepart")
     public String associatePart(@Valid @RequestParam("partID") int theID, Model theModel){
-    //    theModel.addAttribute("product", product);
-    //    Product product1=new Product();
+        //    theModel.addAttribute("product", product);
+        //    Product product1=new Product();
         if (product1.getName()==null) {
             return "saveproductscreen";
         }
         else{
-        product1.getParts().add(partService.findById(theID));
-        partService.findById(theID).getProducts().add(product1);
-        ProductService productService = context.getBean(ProductServiceImpl.class);
-        productService.save(product1);
-        partService.save(partService.findById(theID));
-        theModel.addAttribute("product", product1);
-        theModel.addAttribute("assparts",product1.getParts());
-        List<Part>availParts=new ArrayList<>();
-        for(Part p: partService.findAll()){
-            if(!product1.getParts().contains(p))availParts.add(p);
-        }
-        theModel.addAttribute("availparts",availParts);
-        return "productForm";}
- //        return "confirmationassocpart";
+            product1.getParts().add(partService.findById(theID));
+            partService.findById(theID).getProducts().add(product1);
+            ProductService productService = context.getBean(ProductServiceImpl.class);
+            productService.save(product1);
+            partService.save(partService.findById(theID));
+            theModel.addAttribute("product", product1);
+            theModel.addAttribute("assparts",product1.getParts());
+            List<Part>availParts=new ArrayList<>();
+            for(Part p: partService.findAll()){
+                if(!product1.getParts().contains(p))availParts.add(p);
+            }
+            theModel.addAttribute("availparts",availParts);
+            return "productForm";}
+        //        return "confirmationassocpart";
     }
     @GetMapping("/removepart")
     public String removePart(@RequestParam("partID") int theID, Model theModel){
         theModel.addAttribute("product", product);
-      //  Product product1=new Product();
+        //  Product product1=new Product();
         product1.getParts().remove(partService.findById(theID));
         partService.findById(theID).getProducts().remove(product1);
         ProductService productService = context.getBean(ProductServiceImpl.class);
@@ -173,5 +172,19 @@ public class AddProductController {
         }
         theModel.addAttribute("availparts",availParts);
         return "productForm";
+    }
+
+    // Route to decrement product's inventory if successful
+    @GetMapping("/purchaseProduct")
+    public String purchaseProduct(@RequestParam("productID") int theId, Model theModel) {
+        ProductService productService = context.getBean(ProductServiceImpl.class);
+        Product product2 = productService.findById(theId);
+        boolean purchaseConfirmation = product2.purchaseProduct();
+        if (purchaseConfirmation) {
+            productService.save(product2);
+            return "purchasesuccess";
+        } else {
+            return "purchaseerror";
+        }
     }
 }

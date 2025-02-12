@@ -11,27 +11,27 @@ import javax.persistence.Entity;
  */
 @Entity
 @DiscriminatorValue("2")
-public class OutsourcedPart extends Part{
-String companyName;
+public class OutsourcedPart extends Part {
+    private final int minimum;
+    private final int maximum;
+
+    String companyName;
 
     public OutsourcedPart() {
-        this.minInv = 0;
-        this.maxInv = 100;
+        this.minimum = 0;
+        this.maximum = 100;
     }
 
     public String getCompanyName() {
         return companyName;
     }
 
+
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
     }
 
-    public int getMaxValue() {
-        return this.maxInv;
-    }
+    public void validateMinMax() {
 
-    public int getQuantity() {
-        return this.inv;
     }
 }

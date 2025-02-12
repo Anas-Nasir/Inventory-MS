@@ -1,7 +1,10 @@
 package com.example.demo.domain;
 
+import com.example.demo.service.ProductService;
+import com.example.demo.service.ProductServiceImpl;
 import com.example.demo.validators.ValidEnufParts;
 import com.example.demo.validators.ValidProductPrice;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -105,4 +108,13 @@ public class Product implements Serializable {
         return (int) (id ^ (id >>> 32));
     }
 
+    // Function to decrement inventory on successful purchase
+    public boolean purchaseProduct() {
+        if (this.inv >= 1) {
+            this.inv--;
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
