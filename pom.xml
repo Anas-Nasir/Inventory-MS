@@ -66,6 +66,35 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- Java Persistence API (JPA) -->
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>javax.persistence-api</artifactId>
+			<version>2.2</version> <!-- Choose version based on your needs (2.2 or latest) -->
+		</dependency>
+
+		<!-- Hibernate Validator (Bean Validation API implementation) -->
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>6.0.13.Final</version> <!-- Or the latest version -->
+		</dependency>
+
+		<!-- Java Bean Validation API -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>2.0.1.Final</version> <!-- Or the latest version -->
+		</dependency>
+
+		<!-- Optional: For Expression Language (EL) support, needed for some containers like Java EE -->
+		<dependency>
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.el</artifactId>
+			<version>3.0.0</version> <!-- If needed for Java EE containers -->
+		</dependency>
+
 	</dependencies>
 
 	<build>
