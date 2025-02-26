@@ -4,9 +4,10 @@ import com.example.demo.service.ProductService;
 import com.example.demo.service.ProductServiceImpl;
 import com.example.demo.validators.ValidEnufParts;
 import com.example.demo.validators.ValidProductPrice;
+import jakarta.persistence.*;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import javax.validation.constraints.Min;
 import java.io.Serializable;
 import java.util.HashSet;

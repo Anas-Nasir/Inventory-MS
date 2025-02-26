@@ -2,7 +2,7 @@ package com.example.demo.domain;
 
 import com.example.demo.validators.ValidDeletePart;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
