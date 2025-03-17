@@ -6,6 +6,7 @@ import com.example.demo.service.InhousePartService;
 import com.example.demo.service.InhousePartServiceImpl;
 import com.example.demo.service.PartService;
 import com.example.demo.service.PartServiceImpl;
+import com.example.demo.validators.ValidInv;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;

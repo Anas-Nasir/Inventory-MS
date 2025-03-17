@@ -12,14 +12,12 @@ import jakarta.persistence.Entity;
 @Entity
 @DiscriminatorValue("2")
 public class OutsourcedPart extends Part {
-    private final int minimum;
-    private final int maximum;
+
 
     String companyName;
 
     public OutsourcedPart() {
-        this.minimum = 0;
-        this.maximum = 100;
+
     }
 
     public String getCompanyName() {
@@ -31,7 +29,10 @@ public class OutsourcedPart extends Part {
         this.companyName = companyName;
     }
 
-    public void validateMinMax() {
 
-    }
+//    public void validateMinMax() {
+//
+//    }
+
+
 }

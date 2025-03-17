@@ -51,7 +51,7 @@ public class InhousePartServiceImpl implements InhousePartService {
 
     @Override
     public void save(InhousePart thePart) {
-        thePart.validateMinMax();
+    //    thePart.validateMinMax();
         partRepository.save(thePart);
 
     }

@@ -22,13 +22,23 @@
     <p><input type="text" th:field="*{inv}" placeholder="Inventory" class="form-control mb-4 col-4"/></p>
     <p th:if="${#fields.hasErrors('inv')}" th:errors="*{inv}">Inventory Error</p>
 
+
     Min Inventory
-    <p><input type="text" th:field="*{minimum}" placeholder="Minimum Inventory" class="form-control mb-4 col-4"/></p>
-    <p th:if="${#fields.hasErrors('minimum')}" th:errors="*{minimum}">Minimum Inventory Error</p>
+    <p><input type="number" th:field="*{minInv}" placeholder="Minimum Inventory" class="form-control mb-4 col-4"/></p>
+    <p th:if="${#fields.hasErrors('minInv')}" th:errors="*{minInv}">Minimum Inventory Error</p>
 
     Max Inventory
-    <p><input type="text" th:field="*{maximum}" placeholder="Maximum Inventory" class="form-control mb-4 col-4"/></p>
-    <p th:if="${#fields.hasErrors('maximum')}" th:errors="*{maximum}">Maximum Inventory Error</p>
+    <p><input type="number" th:field="*{maxInv}" placeholder="Maximum Inventory" class="form-control mb-4 col-4"/></p>
+    <p th:if="${#fields.hasErrors('maxInv')}" th:errors="*{maxInv}">Maximum Inventory Error</p>
+
+    <div th:if="${#fields.hasAnyErrors()}" >
+        <ul>
+            <li th:each="err: ${#fields.allErrors()}" th:text="${err}">
+
+            </li>
+        </ul>
+    </div>
+
 
 
     <p><input type="text" th:field="*{companyName}" placeholder="Company Name" class="form-control mb-4 col-4"/></p>

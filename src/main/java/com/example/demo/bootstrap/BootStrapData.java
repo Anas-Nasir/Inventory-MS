@@ -75,39 +75,49 @@ public class BootStrapData implements CommandLineRunner {
             AMD.setName("AMD Ryzen 9 5900X Processor");
             AMD.setPrice(299.99);
             AMD.setInv(10);
+            AMD.setMinInv(1);
+            AMD.setMaxInv(50);
+            partRepository.save(AMD);
 
             InhousePart Nvidia = new InhousePart();
             Nvidia.setName("NVIDIA RTX 4090 GPU");
             Nvidia.setPrice(499.99);
             Nvidia.setInv(5);
+            Nvidia.setMinInv(1);
+            Nvidia.setMaxInv(50);
+            partRepository.save(Nvidia);
 
             InhousePart Corsair = new InhousePart();
             Corsair.setName("64GB Corsair Vengeance RAM");
             Corsair.setPrice(499.44);
             Corsair.setInv(10);
+            Corsair.setMinInv(1);
+            Corsair.setMaxInv(50);
+            partRepository.save(Corsair);
+
 
             InhousePart NVMe = new InhousePart();
             NVMe.setName("1TB NVMe SSD");
             NVMe.setPrice(129.99);
             NVMe.setInv(15);
+            NVMe.setMinInv(1);
+            NVMe.setMaxInv(50);
+            partRepository.save(NVMe);
 
             InhousePart PSU = new InhousePart();
             PSU.setName("850W PSU (Power Supply Unit");
             PSU.setPrice(199);
             PSU.setInv(10);
-
-            partRepository.save(AMD);
-            partRepository.save(Nvidia);
-            partRepository.save(Corsair);
-            partRepository.save(NVMe);
+            PSU.setMinInv(1);
+            PSU.setMaxInv(50);
             partRepository.save(PSU);
 
 
-            Product ElgatoStreamDeck = new Product("Elgato Stream Deck", 1499.99, 3);
-            Product LogitechC920Webcam = new Product("Logitech C920 Webcam", 399.99, 7);
-            Product BlueYetiMicrophone = new Product("Blue Yeti Microphone", 1299.99, 4);
-            Product RingLight = new Product("Ring Light", 799.99, 6);
-            Product GreenScreen = new Product("Green Screen", 999.99, 5);
+            Product ElgatoStreamDeck = new Product("Elgato Stream Deck", 499.99, 20);
+            Product LogitechC920Webcam = new Product("Logitech C920 Webcam", 399.99, 10);
+            Product BlueYetiMicrophone = new Product("Blue Yeti Microphone", 299.99, 15);
+            Product RingLight = new Product("Ring Light", 99.99, 12);
+            Product GreenScreen = new Product("Green Screen", 99.99, 20);
 
             productRepository.save(ElgatoStreamDeck);
             productRepository.save(LogitechC920Webcam);

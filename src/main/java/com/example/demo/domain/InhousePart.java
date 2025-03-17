@@ -13,13 +13,11 @@ import jakarta.persistence.Entity;
 @Entity
 @DiscriminatorValue("1")
 public class InhousePart extends Part{
-    private final int minimum;
-    private final int maximum;
+
     int partId;
 
     public InhousePart() {
-        this.minimum = 0;
-        this.maximum = 100;
+
     }
 
     public int getPartId() {
@@ -31,8 +29,9 @@ public class InhousePart extends Part{
     }
 
 
+//    public void validateMinMax() {
+//
+//    }
 
-    public void validateMinMax() {
 
-    }
 }
