@@ -5,9 +5,7 @@ A full-stack Inventory Management System built with Java and Spring Framework, d
 
 ## DEMO 
 
-![image](https://github.com/user-attachments/assets/a9a99160-3453-465d-8a3e-1203c2697497)
-![image](https://github.com/user-attachments/assets/e5495d04-8e03-4bdd-9bb6-2c49e3da7035)
-
+![image](https://github.com/user-attachments/assets/a77fbbdd-739c-464b-a831-7fc95ccd0b07)
 
 ## ✅ Features
 
